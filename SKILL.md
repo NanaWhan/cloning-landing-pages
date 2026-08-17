@@ -88,8 +88,39 @@ Three things the schema will not tell you:
 - **The archive is flat at its root** — no top-level directory — so always
   extract into a directory you created, or it detonates into the current one.
 
-Then rebrand, which is the actual point. The clone ships an `AGENTS.md` naming
-its own safe-to-edit areas; trust that file over any list here.
+## Rebranding — the actual point
+
+The clone ships an `AGENTS.md` naming its own safe-to-edit areas; trust that
+file over any list here. What that file won't tell you is that **a fresh clone
+is still wearing the source's identity in four places people forget**, all of
+which ship silently:
+
+- **`src/app/layout.tsx` metadata.** Carries the source's `title`, its
+  `openGraph.title`, its favicon, and — easiest to miss — `openGraph.siteName`
+  set to the source's own domain.
+- **Stray strings inside SVG `<title>` elements.** A real clone had
+  `mediaval-fantasy-paper-scroll` sitting in `sections/navbar.tsx`, the source
+  author's internal name for an icon. It never appears in the visible page, so
+  reading the rendered site will not catch it — but it is in the markup, and it
+  surfaces as a title in some contexts. Grep the source's brand across `src/`
+  rather than trusting your eyes.
+- **`public/assets/cloned/`.** The source's real image files. On a personal site
+  that includes photographs of a person. Replace them; do not ship them.
+- **`robots.ts`, `sitemap.ts`, `llms.txt/route.ts`.** Generated from the
+  source's SEO identity and pointing at its routes.
+
+Edit freely in `content.ts`, `sections/`, `components/`, and `svgs/`. Treat
+`ditto.css` as load-bearing: small tweaks are fine, broad rewrites break the
+fidelity you paid for. Leave `_cids.ts` and `_styles.ts` alone — they are anchor
+plumbing, not content. `ditto-meta.ts` and `src/app/ditto/` are emitted only for
+captures that need runtime interaction wiring; when present, don't touch those
+either.
+
+The rule that matters: **rebranding is not a find-and-replace on a company
+name.** If the source is a personal site, the copy is a biography — someone's
+family, their faith, their job history. Replacing that is a rewrite, not a
+substitution, and it is the difference between using a layout and stealing an
+identity.
 
 ## Choosing mode
 
@@ -118,11 +149,13 @@ fold, large regions rendered as flat background colour while the source showed
 text and illustrations. The DOM insisted all was well — `opacity: 1`, visible,
 no transform/filter/clip, correct position, dark text on light, ancestors clean.
 Ruled out and *not* the cause: occlusion by the absolute overlay image, stale
-screenshots, service workers. **Unresolved.** Don't repeat those five diagnostic
-rounds — read the browser console, which should have been first.
+screenshots, service workers, and **a clean console** — no errors, no warnings,
+a single React DevTools notice. **Unresolved.** Those five checks are spent;
+start somewhere else.
 
 **Debug order:** console → network → section source → DOM. The DOM is the most
-expensive instrument and the last to reach for.
+expensive instrument and the last to reach for. Note that a clean console does
+not clear the clone — it only means the failure is in paint, not in script.
 
 ## Common Mistakes
 
