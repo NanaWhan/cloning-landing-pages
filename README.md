@@ -46,6 +46,14 @@ someone else's brand, logo, or copy is not, and the skill refuses that. Be
 especially careful with personal sites: the text on them is somebody's actual
 biography, not placeholder filler.
 
+## Author
+
+Built and maintained by **[NanaWhan](https://github.com/NanaWhan)**.
+
+Everything in `SKILL.md` came out of actually running this end to end — the
+Windows tar failure, the 404ing nav, the unresolved paint bug. It's a field
+report, not a summary of the docs.
+
 ## License
 
 MIT — see [LICENSE](LICENSE). ditto itself is separately MIT-licensed by
