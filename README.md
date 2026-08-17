@@ -48,7 +48,8 @@ biography, not placeholder filler.
 
 ## Author
 
-Built and maintained by **[NanaWhan](https://github.com/NanaWhan)**.
+**Cherish Banini Seinty** — [cherishseinty.dev](https://www.cherishseinty.dev/)
+· [@NanaWhan](https://github.com/NanaWhan)
 
 Everything in `SKILL.md` came out of actually running this end to end — the
 Windows tar failure, the 404ing nav, the unresolved paint bug. It's a field
